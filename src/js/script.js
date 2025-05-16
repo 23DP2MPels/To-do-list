@@ -4,10 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const titleInput = document.getElementById('title');
     const descriptionInput = document.getElementById('description');
 
-    // Загрузка задач при загрузке страницы
     loadTasks();
 
-    // Обработчик отправки формы
+    // form check
     taskForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -38,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Функция загрузки задач
+    // loadtask function
     async function loadTasks() {
         try {
             const response = await fetch('/tasks');
@@ -52,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Отображение задач
+    //rendertask
     function renderTasks(tasks) {
         taskList.innerHTML = '';
         tasks.forEach(task => {
@@ -62,6 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="task-header">
                     <h3>${task.title}</h3>
                     <div class="task-actions">
+                        <img 
+                            src="src/img/edit.png" 
+                            class="edit-icon" 
+                            onclick="editTask('${task._id}')"
+                            alt="Edit"
+                        >
                         <input 
                             type="checkbox" 
                             class="status-checkbox" 
@@ -88,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Функция переключения статуса
+    // change status
     window.toggleStatus = async (id) => {
         try {
             const taskElement = document.querySelector(`[onclick*="${id}"]`).closest('.task');
@@ -112,8 +117,18 @@ document.addEventListener('DOMContentLoaded', () => {
             alert(error.message);
         }
     };
+    
+    // edit task
+    window.editTask = async (id) => {
+        try {
+             alert("Sorry x_x")
+        } catch (error) {
+            console.error(error);
+            alert(error.message);
+        }
+    };
 
-    // Функция удаления задачи
+    // delete task
     window.deleteTask = async (id) => {
         if (!confirm('Vai tiešām vēlaties dzēst šo uzdevumu?')) return;
         
