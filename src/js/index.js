@@ -62,7 +62,6 @@ app.post('/tasks', async (req, res) => {
 app.put('/tasks/:id', async (req, res) => {
   try {
     const updatedTask = await Task.findByIdAndUpdate(req.params.id, { ...req.body, updatedAt: new Date() }, { new: true });
-    res.json({ message: 'Task updated' });
     return res.json(updatedTask);
   } catch (error) {
     res.status(400).json({ message: error.message });
