@@ -85,19 +85,39 @@ button:hover {
 input[type="checkbox"] {
     width: 22px;
     height: 22px;
+    position: relative;
+    vertical-align: top;
+    margin-top: 6.5px;
     cursor: pointer;
 }
 
 .delete-icon {
     width: 22px;
-    height: 22px;
+    height: 23px;
+    padding: 5px 5px 5px 5px;
     cursor: pointer;
-    position: relative; /* Для псевдоэлемента */
-    overflow: hidden; /* Скрывает выходящие за границы элементы */
+    position: relative;
+    overflow: hidden;
     transition: all 0.3s ease;
 }
 
 .delete-icon:hover {
+    transform: scale(0.90);
+    filter: brightness(0.9);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) inset;
+}
+
+.edit-icon {
+    width: 22px;
+    height: 22px;;
+    padding: 5px 5px 5px 5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.edit-icon:hover {
     transform: scale(0.90);
     filter: brightness(0.9);
     box-shadow: 0 2px 8px rgba(0,0,0,0.1) inset;
