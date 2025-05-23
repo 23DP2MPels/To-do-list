@@ -2,7 +2,7 @@
 <html lang="lv">
 <head>
     <meta charset="UTF-8">
-    <title>To-Do List</title>
+    <title>To-Do List / Pieslēgšanās</title>
     <link rel="stylesheet" href="/src/css/styles.css">
 </head>
 <body>
@@ -68,10 +68,23 @@
 
         let isLoginMode = true;
 
+        // update page title 
+        function updatePageTitle() {
+        if (currentUser && currentUser.username) {
+            document.title = `To-Do List / ${currentUser.username}`;
+        } else {
+            if (isLoginMode) {
+                document.title = 'To-Do List / Pieslēgšanās'
+            } else {
+                document.title = 'To-Do List / Reģistrācija'; 
+            }
+        }}
+
         // Switch between login and signup
         authSwitchLink.addEventListener('click', (e) => {
             e.preventDefault();
             isLoginMode = !isLoginMode;
+            updatePageTitle();
             
             if (isLoginMode) {
                 authTitle.textContent = 'Pieslēgšanās';
@@ -130,19 +143,6 @@
                 alert(error.message);
             }
         });
-
-        // update page title 
-        function updatePageTitle() {
-        if (currentUser && currentUser.username) {
-            document.title = `To-Do List / ${currentUser.username}`;
-        } else {
-            if (isLoginMode) {
-                document.title = 'To-Do List / Login';
-            } else {
-                document.title = 'To-Do List / Register';
-            }
-            
-        }}
 
         // Validate existing token
         async function validateToken() {
