@@ -2,7 +2,7 @@
 <html lang="lv">
 <head>
     <meta charset="UTF-8">
-    <title>To-Do List ar Autentifikāciju</title>
+    <title>To-Do List</title>
     <link rel="stylesheet" href="/src/css/styles.css">
 </head>
 <body>
@@ -131,6 +131,19 @@
             }
         });
 
+        // update page title 
+        function updatePageTitle() {
+        if (currentUser && currentUser.username) {
+            document.title = `To-Do List / ${currentUser.username}`;
+        } else {
+            if (isLoginMode) {
+                document.title = 'To-Do List / Login';
+            } else {
+                document.title = 'To-Do List / Register';
+            }
+            
+        }}
+
         // Validate existing token
         async function validateToken() {
             try {
@@ -143,6 +156,7 @@
                 if (response.ok) {
                     const data = await response.json();
                     currentUser = data.user;
+                    updatePageTitle();
                     showMainApp();
                 } else {
                     logout();
@@ -158,6 +172,7 @@
             authContainer.style.display = 'none';
             appContainer.style.display = 'block';
             welcomeText.textContent = `Sveiks, ${currentUser.username}!`;
+            updatePageTitle();
             loadTasks();
         }
 
@@ -166,6 +181,7 @@
             localStorage.removeItem('authToken');
             authToken = null;
             currentUser = null;
+            updatePageTitle();
             authContainer.style.display = 'flex';
             appContainer.style.display = 'none';
         }
